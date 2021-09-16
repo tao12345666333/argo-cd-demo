@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: argo-cd-demo
+  name: argo-cd-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: argo-cd-demo
+  template:
+    metadata:
+      labels:
+        app: argo-cd-demo
+    spec:
+      containers:
+      - image: ghcr.io/tao12345666333/argo-cd-demo/argo-cd-demo:d5643cee896f112b6a05fc6df60acbeb0501ccaa
+        name: argo-cd-demo
+        ports:
+          - containerPort: 8888

@@ -1,0 +1,79 @@
+name: Deployment CI
+
+on:
+  push:
+    branches: 
+      - kustomize
+
+jobs:
+
+  build:
+    name: Push Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Log in to GitHub Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build container image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}/argo-cd-demo:${{ github.sha }}
+
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
+  
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs: build
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Kustomize
+        uses: imranismail/setup-kustomize@v1
+        with:
+          kustomize-version: "4.3.0"
+
+      - name: Update Kubernetes resources
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        run: |-
+          cd manifests
+          kustomize edit set image ghcr.io/${{ github.repository }}/argo-cd-demo:${{ github.sha }}
+          cat kustomization.yaml
+          kustomize build ./ > ../kustomization/manifests.yaml
+          cat ../kustomization/manifests.yaml
+
+      - uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          branch: kustomize
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: deploy
+    continue-on-error: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Datree
+        run: curl https://get.datree.io | /bin/bash
+        
+      - name: Run Datree's policy check
+        run: datree test ./kustomization/manifests.yaml
