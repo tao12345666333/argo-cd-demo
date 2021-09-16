@@ -29,7 +29,7 @@ spec:
         app: argo-cd-demo
     spec:
       containers:
-      - image: ghcr.io/tao12345666333/argo-cd-demo/argo-cd-demo:e41ffce166ad9b9184fbd24136fa769dd0f01458
+      - image: ghcr.io/tao12345666333/argo-cd-demo/argo-cd-demo:26a41b369377d5b663a19e91a93f208ed3da28ae
         name: argo-cd-demo
         ports:
         - containerPort: 8888

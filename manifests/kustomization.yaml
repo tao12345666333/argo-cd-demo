@@ -4,7 +4,7 @@ kind: Kustomization
 
 images:
 - name: ghcr.io/tao12345666333/argo-cd-demo/argo-cd-demo
-  newTag: e41ffce166ad9b9184fbd24136fa769dd0f01458
+  newTag: 26a41b369377d5b663a19e91a93f208ed3da28ae
 
 resources:
 - deployment.yaml
