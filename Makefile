@@ -1,6 +1,6 @@
 default: build
 
-VERSION ?= 1.0
+VERSION ?= 2.0
 
 GITSHA ?= "no-git-module"
 ifneq ("$(wildcard .git)", "")
