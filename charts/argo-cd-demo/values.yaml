@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/tao12345666333/argo-cd-demo/argo-cd-demo
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "d5643cee896f112b6a05fc6df60acbeb0501ccaa"
+  tag: "7df55c41572a05f92d759fa4e65f328348dc706b"
 
 imagePullSecrets: []
 nameOverride: ""
