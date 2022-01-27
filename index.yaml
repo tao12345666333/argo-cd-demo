@@ -3,6 +3,16 @@ entries:
   argo-cd-demo:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-01-27T14:56:15.711205157Z"
+    description: A Helm chart for Kubernetes
+    digest: 2bef771a00f76108c0b0c434f885028c0309399275366ad160113b81bb799d0e
+    name: argo-cd-demo
+    type: application
+    urls:
+    - https://github.com/tao12345666333/argo-cd-demo/releases/download/argo-cd-demo-6.0.0/argo-cd-demo-6.0.0.tgz
+    version: 6.0.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2021-12-03T14:54:17.523975004Z"
     description: A Helm chart for Kubernetes
     digest: def3ffdd26878ecb71412b969d61ed92085c519c3f1c94c5a2f8b3fc32e7714b
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/tao12345666333/argo-cd-demo/releases/download/argo-cd-demo-1.0.0/argo-cd-demo-1.0.0.tgz
     version: 1.0.0
-generated: "2021-12-03T14:54:17.523983605Z"
+generated: "2022-01-27T14:56:15.711218757Z"
