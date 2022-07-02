@@ -3,6 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 images:
+- name: ghcr.io/kkingkill/argo-cd-demo/argo-cd-demo
+  newTag: 4c02aa463b322690014c06c10c20e812e1aba3d8
 - name: ghcr.io/tao12345666333/argo-cd-demo/argo-cd-demo
   newTag: 93d0e7e591c3c4739f5f4d31b8f9a8ace8e74dfe
 
